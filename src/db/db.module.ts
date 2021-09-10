@@ -2,14 +2,14 @@
 require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { Pool } from 'pg';
-import { PG_CONNECTION } from '../constants';
+import { PG_CONNECTION } from '../app/constants';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
 
 if (!DB_HOST || !DB_PORT || !DB_USERNAME || !DB_PASSWORD || !DB_NAME) {
   throw new Error('Env vars DB_*** are required');
 }
-console.log(DB_HOST);
+
 const dbProvider = {
   provide: PG_CONNECTION,
   useValue: new Pool({

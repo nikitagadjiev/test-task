@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export function TransformInt(value: any): number {
   if (value === '' || value === null || value === undefined) {

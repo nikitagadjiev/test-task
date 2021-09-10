@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 export const TransformDate = (dateStr: string): Date => {
   if (dateStr === '' || dateStr === null || dateStr === undefined) {
@@ -7,9 +7,7 @@ export const TransformDate = (dateStr: string): Date => {
   }
 
   if (_.isString(dateStr)) {
-    const reverseDate = dateStr.split('.').reverse().join('-');
-
-    const date = new Date(reverseDate);
+    const date = new Date(dateStr);
 
     if (date.getDay() === 6 || date.getDay() === 0) {
       throw new BadRequestException(
