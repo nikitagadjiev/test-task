@@ -8,12 +8,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import {
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiParam,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { CreateRentSession } from 'src/interfaces/create-rent-session.interface';
 import { GetRentPrice } from 'src/interfaces/get-rent-price.interface';
 import { AppService } from './app.service';
