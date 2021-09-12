@@ -1,3 +1,4 @@
+// This file contains main module and all imports.
 import { Module } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppController } from './app.controller';

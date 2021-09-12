@@ -1,3 +1,4 @@
+// This function is used by class-transformer for transform id params from string to number format
 import * as _ from 'lodash';
 
 export function TransformInt(value: any): number {

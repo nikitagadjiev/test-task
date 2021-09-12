@@ -1,3 +1,4 @@
+// This interface describes http response of POST /session
 export interface CreateRentSession {
   car_id: number;
   tariff_id: number;

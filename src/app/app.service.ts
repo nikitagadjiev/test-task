@@ -1,3 +1,4 @@
+// This file contains all methods for rent operations
 import {
   BadRequestException,
   Inject,
@@ -21,6 +22,7 @@ export class AppService {
     private readonly carsService: CarsService,
   ) {}
 
+  // Method for calculating the rental price
   async getRentPrice(
     query: GetRentPriceQuery,
     param: GetRentPriceParam,
@@ -42,6 +44,7 @@ export class AppService {
     return { rentPrice };
   }
 
+  // Method for create the rent session
   async createRentSession(
     body: CreateRentSessionBody,
   ): Promise<CreateRentSession> {

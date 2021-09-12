@@ -1,3 +1,4 @@
+// This function is used by class-transformer for transform date from string to Date format
 import { BadRequestException } from '@nestjs/common';
 import * as _ from 'lodash';
 

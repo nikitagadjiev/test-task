@@ -1,3 +1,4 @@
+// This file contains all methods for tariff operations
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { PG_CONNECTION } from '../constants';
 

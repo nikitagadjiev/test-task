@@ -1,3 +1,4 @@
+// This file contains all methods for cars operations
 import { Inject, Injectable } from '@nestjs/common';
 import { PG_CONNECTION } from '../constants';
 

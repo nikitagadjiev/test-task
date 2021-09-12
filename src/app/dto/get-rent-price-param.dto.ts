@@ -3,6 +3,7 @@ import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { TransformInt } from '../../utils/transform-int.util';
 
+// This class describes http path param of GET /price
 export class GetRentPriceParam {
   @ApiProperty({
     type: 'number',

@@ -1,3 +1,4 @@
+// This file contains all routes of app.
 import {
   Body,
   Controller,
