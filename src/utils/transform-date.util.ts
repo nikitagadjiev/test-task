@@ -2,7 +2,7 @@
 import { BadRequestException } from '@nestjs/common';
 import * as _ from 'lodash';
 
-export const TransformDate = (dateStr: string): Date => {
+export const TransformDate = (dateStr: string): Date | undefined => {
   if (dateStr === '' || dateStr === null || dateStr === undefined) {
     return undefined;
   }

@@ -5,19 +5,18 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateRentSession } from 'src/interfaces/create-rent-session.interface';
-import { GetRentPrice } from 'src/interfaces/get-rent-price.interface';
-import { Report } from 'src/interfaces/report.interface';
-import { CarsService } from './cars/cars.service';
-import { PG_CONNECTION } from './constants';
+import { CreateRentSession } from 'src/app/rents/interfaces/create-rent-session.interface';
+import { GetRentPrice } from 'src/app/rents/interfaces/get-rent-price.interface';
+import { Report } from 'src/app/rents/interfaces/report.interface';
+import { CarsService } from '../cars/cars.service';
+import { PG_CONNECTION } from '../../db/constants';
 import { CreateRentSessionBody } from './dto/create-rent-session-body.dto';
-import { GetRentPriceParam } from './dto/get-rent-price-param.dto';
 import { GetRentPriceQuery } from './dto/get-rent-price-query.dto';
 import { GetReportQuery } from './dto/get-report-query.dto';
-import { TariffsService } from './tariffs/tariffs.service';
+import { TariffsService } from '../tariffs/tariffs.service';
 
 @Injectable()
-export class AppService {
+export class RentsService {
   constructor(
     @Inject(PG_CONNECTION) private pg: any,
     private readonly tariffsService: TariffsService,
@@ -25,10 +24,7 @@ export class AppService {
   ) {}
 
   // Method for calculating the rental price
-  async getRentPrice(
-    query: GetRentPriceQuery,
-    param: GetRentPriceParam,
-  ): Promise<GetRentPrice> {
+  async getRentPrice(query: GetRentPriceQuery): Promise<GetRentPrice> {
     const daysForRent = this.getDaysDiff(query.from, query.to);
 
     if (daysForRent < 3 || daysForRent > 30) {
@@ -37,7 +33,7 @@ export class AppService {
       );
     }
 
-    const tariff = await this.tariffsService.getTariff(param.tariffId);
+    const tariff = await this.tariffsService.getTariff(query.tariffId);
     const discount = await this.getDiscount(daysForRent);
 
     const rentPrice =

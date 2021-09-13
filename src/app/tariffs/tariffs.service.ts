@@ -1,6 +1,6 @@
 // This file contains all methods for tariff operations
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { PG_CONNECTION } from '../constants';
+import { PG_CONNECTION } from '../../db/constants';
 
 @Injectable()
 export class TariffsService {

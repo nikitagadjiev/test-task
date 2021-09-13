@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsDate } from 'class-validator';
+import { IsDate, IsInt, IsNumber } from 'class-validator';
 import { TransformDate } from 'src/utils/transform-date.util';
+import { TransformInt } from 'src/utils/transform-int.util';
 
 // This class describes http query param of GET /price
 export class GetRentPriceQuery {
@@ -22,4 +23,14 @@ export class GetRentPriceQuery {
   @IsDate()
   @Transform(TransformDate)
   to: Date;
+
+  @ApiProperty({
+    type: 'number',
+    example: 1,
+    description: 'Selected tariff id',
+  })
+  @IsNumber()
+  @IsInt()
+  @Transform(TransformInt)
+  tariffId: number;
 }

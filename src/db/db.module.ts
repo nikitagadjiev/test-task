@@ -3,7 +3,7 @@
 require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { Pool } from 'pg';
-import { PG_CONNECTION } from '../app/constants';
+import { PG_CONNECTION } from './constants';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
 

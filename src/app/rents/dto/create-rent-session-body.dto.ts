@@ -1,7 +1,7 @@
 import { IsNumber, IsInt, IsDate } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import { TransformInt } from '../../utils/transform-int.util';
+import { TransformInt } from '../../../utils/transform-int.util';
 import { TransformDate } from 'src/utils/transform-date.util';
 
 // This class describes http body of POST /session
