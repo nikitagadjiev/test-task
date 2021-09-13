@@ -20,4 +20,18 @@ export class CarsService {
         WHERE id=${carId};`,
     );
   }
+
+  async getRentsCount(carId: number) {
+    const queryResult = await this.pg
+      .query(`SELECT count(id) as rents_count, car_id 
+  FROM rent_sessions where car_id = ${carId} GROUP BY car_id;`);
+    return queryResult.rows;
+  }
+
+  async getAllCarsRentsCount() {
+    const queryResult = await this.pg
+      .query(`SELECT count(*) as rents_count, car_id 
+      FROM public.rent_sessions  group by car_id;`);
+    return queryResult.rows;
+  }
 }

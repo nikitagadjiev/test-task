@@ -12,7 +12,7 @@ export const TransformDate = (dateStr: string): Date => {
 
     if (date.getDay() === 6 || date.getDay() === 0) {
       throw new BadRequestException(
-        'The end and start of the lease cannot be a weekend.',
+        'The date of the lease cannot be a weekend.',
       );
     }
 

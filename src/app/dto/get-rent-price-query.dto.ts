@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsDate, IsISO8601 } from 'class-validator';
+import { IsDate } from 'class-validator';
 import { TransformDate } from 'src/utils/transform-date.util';
 
 // This class describes http query param of GET /price

@@ -7,11 +7,13 @@ import {
 } from '@nestjs/common';
 import { CreateRentSession } from 'src/interfaces/create-rent-session.interface';
 import { GetRentPrice } from 'src/interfaces/get-rent-price.interface';
+import { Report } from 'src/interfaces/report.interface';
 import { CarsService } from './cars/cars.service';
 import { PG_CONNECTION } from './constants';
-import { CreateRentSessionBody } from './dto/create-rent-session.dto';
+import { CreateRentSessionBody } from './dto/create-rent-session-body.dto';
 import { GetRentPriceParam } from './dto/get-rent-price-param.dto';
 import { GetRentPriceQuery } from './dto/get-rent-price-query.dto';
+import { GetReportQuery } from './dto/get-report-query.dto';
 import { TariffsService } from './tariffs/tariffs.service';
 
 @Injectable()
@@ -80,6 +82,32 @@ export class AppService {
     };
   }
 
+  // Method for getting the report from db
+  async getReport(query: GetReportQuery): Promise<Report> {
+    const { carId, date } = query;
+
+    const report: Report = {
+      rentsByDate: '',
+      carRentsCount: '',
+      allCarsRentsCount: '',
+    };
+
+    if (query.date) {
+      const result = await this.pg.query(
+        `SELECT * FROM rent_sessions WHERE '${date.toUTCString()}' BETWEEN from_date AND to_date;`,
+      );
+      report.rentsByDate = result.rows;
+    }
+
+    if (carId) {
+      report.carRentsCount = await this.carsService.getRentsCount(carId);
+    }
+
+    report.allCarsRentsCount = await this.carsService.getAllCarsRentsCount();
+    return report;
+  }
+
+  // This method calculates difference between two dates in days
   getDaysDiff(fromDate: Date, toDate: Date) {
     const fromDateTime = fromDate.getTime();
     const toDateTime = toDate.getTime();
@@ -88,6 +116,7 @@ export class AppService {
     return days;
   }
 
+  // This method gets the discount based on the number of days
   async getDiscount(days: number) {
     const queryResult = await this.pg.query(
       `SELECT value FROM discounts WHERE ${days} BETWEEN min_days AND max_days`,
